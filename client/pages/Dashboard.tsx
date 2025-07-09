@@ -308,9 +308,9 @@ export default function Dashboard() {
                   <AlertTriangle className="h-4 w-4 text-status-warning" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">23</div>
+                  <div className="text-2xl font-bold">31</div>
                   <p className="text-xs text-muted-foreground">
-                    5 critical, 18 low stock
+                    8 critical, 23 low stock
                   </p>
                 </CardContent>
               </Card>
