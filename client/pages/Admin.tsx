@@ -378,7 +378,7 @@ export default function Admin() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="productSku">SKU</Label>
-                    <Input id="productSku" placeholder="WM-XXXXXX" />
+                    <Input id="productSku" placeholder="SD-XXXXXX" />
                   </div>
                   <div>
                     <Label htmlFor="productName">Product Name</Label>
