@@ -119,7 +119,7 @@ export default function Login() {
 
               <div className="pt-4 text-center">
                 <p className="text-xs text-muted-foreground">
-                  Demo credentials: admin@walmart.com / password
+                  Demo credentials: admin@smartdrop.in / password
                 </p>
               </div>
             </form>
