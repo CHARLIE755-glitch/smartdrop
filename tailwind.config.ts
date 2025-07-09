@@ -14,6 +14,21 @@ export default {
     },
     extend: {
       colors: {
+        // Walmart Brand Colors
+        walmart: {
+          blue: "#0071CE",
+          yellow: "#FFC220",
+          dark: "#004C91",
+          light: "#E6F3FF",
+        },
+        // Status Colors
+        status: {
+          success: "#10B981",
+          warning: "#F59E0B",
+          danger: "#EF4444",
+          info: "#3B82F6",
+        },
+        // Base System Colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -57,6 +72,9 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      fontFamily: {
+        sans: ["Inter", "Roboto", "system-ui", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
