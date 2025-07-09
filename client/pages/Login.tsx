@@ -28,7 +28,7 @@ export default function Login() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (email === "admin@walmart.com" && password === "password") {
+      if (email === "admin@smartdrop.in" && password === "password") {
         navigate("/dashboard");
       } else {
         setError("Invalid email or password");
