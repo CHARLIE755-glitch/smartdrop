@@ -58,29 +58,29 @@ const stores = [
 
 const products = [
   {
-    sku: "WM-001234",
-    name: "Great Value Milk 1L",
+    sku: "SD-001234",
+    name: "Amul Taza Milk 1L",
     category: "Dairy",
     reorderLevel: 50,
     status: "Active",
   },
   {
-    sku: "WM-005678",
-    name: "Wonder Bread Loaf",
+    sku: "SD-005678",
+    name: "Britannia Bread 400g",
     category: "Bakery",
     reorderLevel: 75,
     status: "Active",
   },
   {
-    sku: "WM-009012",
-    name: "Coca-Cola 12pk",
+    sku: "SD-009012",
+    name: "Thums Up 12pk",
     category: "Beverages",
     reorderLevel: 100,
     status: "Active",
   },
   {
-    sku: "WM-003456",
-    name: "Tide Detergent 2L",
+    sku: "SD-003456",
+    name: "Surf Excel Detergent 2kg",
     category: "Household",
     reorderLevel: 40,
     status: "Discontinued",
