@@ -79,7 +79,7 @@ export default function Login() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@walmart.com"
+                  placeholder="admin@smartdrop.in"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
