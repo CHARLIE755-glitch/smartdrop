@@ -271,10 +271,7 @@ export default function Admin() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="storeName">Store Name</Label>
-                    <Input
-                      id="storeName"
-                      placeholder="Walmart Supercenter - City"
-                    />
+                    <Input id="storeName" placeholder="Big Bazaar - Locality" />
                   </div>
                   <div>
                     <Label htmlFor="storeLocation">Location</Label>
