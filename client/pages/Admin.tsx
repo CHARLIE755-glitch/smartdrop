@@ -38,20 +38,20 @@ import { Badge } from "@/components/ui/badge";
 const stores = [
   {
     id: "store-001",
-    name: "Walmart Supercenter - Austin",
-    location: "Austin, TX",
+    name: "Big Bazaar - Mumbai Central",
+    location: "Mumbai, Maharashtra",
     status: "Active",
   },
   {
     id: "store-002",
-    name: "Walmart Supercenter - Dallas",
-    location: "Dallas, TX",
+    name: "Reliance Fresh - Delhi CP",
+    location: "New Delhi, Delhi",
     status: "Active",
   },
   {
     id: "store-003",
-    name: "Walmart Supercenter - Houston",
-    location: "Houston, TX",
+    name: "DMart - Bangalore Koramangala",
+    location: "Bangalore, Karnataka",
     status: "Maintenance",
   },
 ];
