@@ -127,7 +127,7 @@ export default function Login() {
         </Card>
 
         <div className="mt-8 text-center text-xs text-muted-foreground">
-          <p>© 2024 SmartDrop - Walmart Inventory Intelligence Platform</p>
+          <p>© 2024 SmartDrop - Retail Intelligence Platform for India</p>
         </div>
       </div>
     </div>
