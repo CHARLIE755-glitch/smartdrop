@@ -12,6 +12,24 @@ import Forecast from "./pages/Forecast";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
+// Suppress Recharts defaultProps warnings in development
+if (import.meta.env.DEV) {
+  const originalWarn = console.warn;
+  console.warn = (...args) => {
+    const message = args[0];
+    if (
+      typeof message === "string" &&
+      message.includes(
+        "defaultProps will be removed from function components",
+      ) &&
+      (message.includes("XAxis") || message.includes("YAxis"))
+    ) {
+      return; // Suppress this specific warning
+    }
+    originalWarn.apply(console, args);
+  };
+}
+
 const queryClient = new QueryClient();
 
 const App = () => (
