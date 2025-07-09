@@ -92,11 +92,11 @@ const reorderData = [
 ];
 
 const stores = [
-  { id: "store-001", name: "Walmart Supercenter - Austin", status: "good" },
-  { id: "store-002", name: "Walmart Supercenter - Dallas", status: "warning" },
+  { id: "store-001", name: "Big Bazaar - Mumbai Central", status: "good" },
+  { id: "store-002", name: "Reliance Fresh - Delhi CP", status: "warning" },
   {
     id: "store-003",
-    name: "Walmart Supercenter - Houston",
+    name: "DMart - Bangalore Koramangala",
     status: "critical",
   },
 ];
