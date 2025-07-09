@@ -323,7 +323,7 @@ export default function Dashboard() {
                   <TrendingUp className="h-4 w-4 text-status-success" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">94.2%</div>
+                  <div className="text-2xl font-bold">91.8%</div>
                   <p className="text-xs text-muted-foreground">
                     Demand prediction accuracy
                   </p>
@@ -338,7 +338,7 @@ export default function Dashboard() {
                   <MapPin className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">Houston</div>
+                  <div className="text-2xl font-bold">Mumbai</div>
                   <p className="text-xs text-muted-foreground">
                     Highest demand volume
                   </p>
