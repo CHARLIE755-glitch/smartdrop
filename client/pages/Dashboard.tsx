@@ -266,7 +266,27 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedStore, setSelectedStore] = useState("store-001");
   const [selectedSku, setSelectedSku] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("All");
+  const [statusFilter, setStatusFilter] = useState("All");
+  const [showSalesTrend, setShowSalesTrend] = useState(false);
+  const [autoRefresh, setAutoRefresh] = useState(false);
+  const [lastRefresh, setLastRefresh] = useState(new Date());
   const navigate = useNavigate();
+
+  // Auto-refresh functionality
+  useEffect(() => {
+    if (autoRefresh) {
+      const interval = setInterval(
+        () => {
+          setLastRefresh(new Date());
+          // In a real app, this would trigger a data refetch
+        },
+        5 * 60 * 1000,
+      ); // 5 minutes
+
+      return () => clearInterval(interval);
+    }
+  }, [autoRefresh]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
