@@ -28,7 +28,7 @@ export default function Login() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (email === "admin@smartdrop.in" && password === "password") {
+      if (email === "admin@walmart.com" && password === "password") {
         navigate("/dashboard");
       } else {
         setError("Invalid email or password");
@@ -79,7 +79,7 @@ export default function Login() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@smartdrop.in"
+                  placeholder="admin@walmart.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -119,7 +119,7 @@ export default function Login() {
 
               <div className="pt-4 text-center">
                 <p className="text-xs text-muted-foreground">
-                  Demo credentials: admin@smartdrop.in / password
+                  Demo credentials: admin@walmart.com / password
                 </p>
               </div>
             </form>
@@ -127,7 +127,7 @@ export default function Login() {
         </Card>
 
         <div className="mt-8 text-center text-xs text-muted-foreground">
-          <p>© 2024 SmartDrop - Retail Intelligence Platform for India</p>
+          <p>© 2024 SmartDrop - Walmart Inventory Intelligence Platform</p>
         </div>
       </div>
     </div>
