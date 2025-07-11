@@ -459,6 +459,36 @@ export default function Admin() {
               </div>
             </div>
           </TabsContent>
+
+          <TabsContent value="auth" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Supabase Authentication Demo</CardTitle>
+                <CardDescription>
+                  Test real Supabase authentication features with user
+                  management
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-8">
+                  <Settings className="h-16 w-16 mx-auto mb-4 text-walmart-blue" />
+                  <h3 className="text-lg font-semibold mb-2">
+                    Authentication Testing
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                    Visit the dedicated auth page to test Supabase user
+                    registration, login, and session management features.
+                  </p>
+                  <Link to="/auth">
+                    <Button className="bg-walmart-blue hover:bg-walmart-dark text-white">
+                      <Settings className="h-4 w-4 mr-2" />
+                      Open Auth Demo
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
