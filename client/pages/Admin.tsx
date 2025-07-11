@@ -34,6 +34,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import AddStore from "@/components/AddStore";
 import ShowStores from "@/components/ShowStores";
+import AddProduct from "@/components/AddProduct";
 
 // Mock data
 const stores = [
