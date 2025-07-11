@@ -38,49 +38,49 @@ import { Badge } from "@/components/ui/badge";
 const stores = [
   {
     id: "store-001",
-    name: "Big Bazaar - Mumbai Central",
-    location: "Mumbai, Maharashtra",
+    name: "Walmart Supercenter - Dallas TX",
+    location: "Dallas, Texas",
     status: "Active",
   },
   {
     id: "store-002",
-    name: "Reliance Fresh - Delhi CP",
-    location: "New Delhi, Delhi",
+    name: "Walmart Supercenter - Houston TX",
+    location: "Houston, Texas",
     status: "Active",
   },
   {
     id: "store-003",
-    name: "DMart - Bangalore Koramangala",
-    location: "Bangalore, Karnataka",
+    name: "Walmart Supercenter - San Jose CA",
+    location: "San Jose, California",
     status: "Maintenance",
   },
 ];
 
 const products = [
   {
-    sku: "SD-001234",
-    name: "Amul Taza Milk 1L",
+    sku: "SKU-001234",
+    name: "Great Value Milk 1 Gal",
     category: "Dairy",
     reorderLevel: 50,
     status: "Active",
   },
   {
-    sku: "SD-005678",
-    name: "Britannia Bread 400g",
+    sku: "SKU-005678",
+    name: "Wonder Bread Loaf",
     category: "Bakery",
     reorderLevel: 75,
     status: "Active",
   },
   {
-    sku: "SD-009012",
-    name: "Thums Up 12pk",
+    sku: "SKU-009012",
+    name: "Coca-Cola 12pk",
     category: "Beverages",
     reorderLevel: 100,
     status: "Active",
   },
   {
-    sku: "SD-003456",
-    name: "Surf Excel Detergent 2kg",
+    sku: "SKU-003456",
+    name: "Tide Detergent 150oz",
     category: "Household",
     reorderLevel: 40,
     status: "Discontinued",
@@ -271,7 +271,10 @@ export default function Admin() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="storeName">Store Name</Label>
-                    <Input id="storeName" placeholder="Big Bazaar - Locality" />
+                    <Input
+                      id="storeName"
+                      placeholder="Walmart Supercenter - City"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="storeLocation">Location</Label>
@@ -378,7 +381,7 @@ export default function Admin() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="productSku">SKU</Label>
-                    <Input id="productSku" placeholder="SD-XXXXXX" />
+                    <Input id="productSku" placeholder="SKU-XXXXXX" />
                   </div>
                   <div>
                     <Label htmlFor="productName">Product Name</Label>
