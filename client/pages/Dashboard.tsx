@@ -312,9 +312,9 @@ export default function Dashboard() {
                   <AlertTriangle className="h-4 w-4 text-status-warning" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">31</div>
+                  <div className="text-2xl font-bold">23</div>
                   <p className="text-xs text-muted-foreground">
-                    8 critical, 23 low stock
+                    5 critical, 18 low stock
                   </p>
                 </CardContent>
               </Card>
@@ -327,7 +327,7 @@ export default function Dashboard() {
                   <TrendingUp className="h-4 w-4 text-status-success" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">91.8%</div>
+                  <div className="text-2xl font-bold">94.2%</div>
                   <p className="text-xs text-muted-foreground">
                     Demand prediction accuracy
                   </p>
@@ -342,7 +342,7 @@ export default function Dashboard() {
                   <MapPin className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">Mumbai</div>
+                  <div className="text-2xl font-bold">Dallas</div>
                   <p className="text-xs text-muted-foreground">
                     Highest demand volume
                   </p>
