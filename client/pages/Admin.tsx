@@ -32,6 +32,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import AddStore from "@/components/AddStore";
+import ShowStores from "@/components/ShowStores";
 
 // Mock data
 const stores = [
