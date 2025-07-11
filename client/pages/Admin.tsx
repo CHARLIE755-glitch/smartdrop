@@ -415,12 +415,44 @@ export default function Admin() {
           </TabsContent>
 
           <TabsContent value="supabase" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Add Store Component */}
-              <AddStore />
+            <div className="grid grid-cols-1 gap-6">
+              {/* Store Management Section */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4 text-foreground">
+                  Store Management
+                </h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <AddStore />
+                  <ShowStores />
+                </div>
+              </div>
 
-              {/* Show Stores Component */}
-              <ShowStores />
+              {/* Product Management Section */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4 text-foreground">
+                  Product Management
+                </h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <AddProduct />
+                  <div className="lg:col-span-2">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Products from Supabase</CardTitle>
+                        <CardDescription>
+                          Products will be displayed here when fetched from
+                          Supabase
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-center py-8 text-muted-foreground">
+                          <ShoppingCart className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                          <p>Product list component can be added here</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </div>
             </div>
           </TabsContent>
         </Tabs>
