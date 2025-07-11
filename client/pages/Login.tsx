@@ -25,7 +25,13 @@ export default function Login() {
     setIsLoading(true);
     setError("");
 
-    // Simulate authentication - replace with actual Firebase auth
+    // TODO: Replace with Supabase authentication
+    // const { data, error } = await supabase.auth.signInWithPassword({
+    //   email,
+    //   password,
+    // });
+
+    // Simulate authentication - replace with actual Supabase auth
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
