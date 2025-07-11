@@ -45,18 +45,11 @@ export default function Login() {
       <div className="w-full max-w-md">
         {/* Logo and Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className="p-3 bg-walmart-blue rounded-2xl">
-              <Package className="h-8 w-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-walmart-blue">
-                SmartDrop
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Inventory Intelligence
-              </p>
-            </div>
+          <div className="mb-4">
+            <h1 className="text-3xl font-bold text-walmart-blue">SmartDrop</h1>
+            <p className="text-sm text-muted-foreground">
+              Inventory Intelligence
+            </p>
           </div>
         </div>
 
