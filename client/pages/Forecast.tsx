@@ -119,13 +119,13 @@ export default function Forecast() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="store-001">
-                      Big Bazaar - Mumbai Central
+                      Walmart Supercenter - Dallas TX
                     </SelectItem>
                     <SelectItem value="store-002">
-                      Reliance Fresh - Delhi CP
+                      Walmart Supercenter - Houston TX
                     </SelectItem>
                     <SelectItem value="store-003">
-                      DMart - Bangalore Koramangala
+                      Walmart Supercenter - San Jose CA
                     </SelectItem>
                   </SelectContent>
                 </Select>
