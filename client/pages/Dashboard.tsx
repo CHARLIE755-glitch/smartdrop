@@ -331,9 +331,6 @@ export default function Dashboard() {
               </button>
 
               <Link to="/dashboard" className="flex items-center gap-3 ml-4">
-                <div className="p-2 bg-walmart-blue rounded-xl">
-                  <Package className="h-6 w-6 text-white" />
-                </div>
                 <div>
                   <h1 className="text-xl font-bold text-walmart-blue">
                     SmartDrop
