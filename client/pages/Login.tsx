@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function Login() {
   const [email, setEmail] = useState("");
