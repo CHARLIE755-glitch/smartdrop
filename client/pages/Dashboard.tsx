@@ -381,46 +381,55 @@ export default function Dashboard() {
       </nav>
 
       <div className="flex">
-        {/* Sidebar */}
+        {/* Enhanced Walmart-style Sidebar */}
         <div
-          className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-border transform ${
+          className={`fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-200 shadow-lg transform ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}
         >
-          <div className="flex items-center justify-between h-16 px-4 border-b border-border lg:hidden">
-            <span className="text-lg font-semibold">Filters</span>
+          {/* Mobile Header */}
+          <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 bg-walmart-blue lg:hidden">
+            <span className="text-lg font-bold text-white">Control Panel</span>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setSidebarOpen(false)}
+              className="text-white hover:bg-white/20"
             >
               <X className="h-5 w-5" />
             </Button>
           </div>
 
-          <div className="p-6 space-y-6">
-            <div>
-              <Label className="text-sm font-medium text-foreground mb-3 block">
-                Store Selection
-              </Label>
+          {/* Sidebar Content */}
+          <div className="p-6 space-y-8 bg-gray-50/50 h-full">
+            {/* Store Selection Section */}
+            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-walmart-blue/10 rounded-lg">
+                  <MapPin className="h-4 w-4 text-walmart-blue" />
+                </div>
+                <Label className="text-sm font-bold text-gray-800 uppercase tracking-wide">
+                  Store Location
+                </Label>
+              </div>
               <Select value={selectedStore} onValueChange={setSelectedStore}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select store" />
+                <SelectTrigger className="w-full h-11 border-2 border-gray-200 hover:border-walmart-blue transition-colors">
+                  <SelectValue placeholder="Select store location" />
                 </SelectTrigger>
                 <SelectContent>
                   {stores.map((store) => (
                     <SelectItem key={store.id} value={store.id}>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-3 py-1">
                         <div
-                          className={`w-2 h-2 rounded-full ${
+                          className={`w-2.5 h-2.5 rounded-full ${
                             store.status === "good"
-                              ? "bg-status-success"
+                              ? "bg-green-500"
                               : store.status === "warning"
-                                ? "bg-status-warning"
-                                : "bg-status-danger"
+                                ? "bg-amber-500"
+                                : "bg-red-500"
                           }`}
                         />
-                        {store.name}
+                        <span className="font-medium">{store.name}</span>
                       </div>
                     </SelectItem>
                   ))}
@@ -428,31 +437,78 @@ export default function Dashboard() {
               </Select>
             </div>
 
-            <div>
-              <Label className="text-sm font-medium text-foreground mb-3 block">
-                SKU Search
-              </Label>
+            {/* Product Search Section */}
+            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-walmart-yellow/20 rounded-lg">
+                  <Search className="h-4 w-4 text-walmart-blue" />
+                </div>
+                <Label className="text-sm font-bold text-gray-800 uppercase tracking-wide">
+                  Product Search
+                </Label>
+              </div>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
-                  placeholder="Search SKU or product"
+                  placeholder="Search SKU or product name..."
                   value={selectedSku}
                   onChange={(e) => setSelectedSku(e.target.value)}
-                  className="pl-10"
+                  className="pl-12 h-11 border-2 border-gray-200 focus:border-walmart-blue hover:border-gray-300 transition-colors"
                 />
               </div>
             </div>
 
-            <div>
-              <Label className="text-sm font-medium text-foreground mb-3 block">
-                Date Range
-              </Label>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 p-3 border border-border rounded-lg cursor-pointer hover:bg-muted/50">
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">Last 30 days</span>
-                  <ChevronDown className="h-4 w-4 text-muted-foreground ml-auto" />
+            {/* Date Range Section */}
+            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-blue-50 rounded-lg">
+                  <Calendar className="h-4 w-4 text-walmart-blue" />
                 </div>
+                <Label className="text-sm font-bold text-gray-800 uppercase tracking-wide">
+                  Time Period
+                </Label>
+              </div>
+              <div className="space-y-3">
+                <button className="w-full flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg hover:border-walmart-blue hover:bg-walmart-blue/5 transition-all duration-200 group">
+                  <Calendar className="h-4 w-4 text-gray-500 group-hover:text-walmart-blue" />
+                  <span className="text-sm font-medium text-gray-700 group-hover:text-walmart-blue">
+                    Last 30 days
+                  </span>
+                  <ChevronDown className="h-4 w-4 text-gray-400 ml-auto group-hover:text-walmart-blue" />
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Actions Section */}
+            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-green-50 rounded-lg">
+                  <TrendingUp className="h-4 w-4 text-green-600" />
+                </div>
+                <Label className="text-sm font-bold text-gray-800 uppercase tracking-wide">
+                  Quick Actions
+                </Label>
+              </div>
+              <div className="space-y-2">
+                <button className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors text-left">
+                  <RefreshCw className="h-4 w-4 text-blue-500" />
+                  <span className="text-sm font-medium text-gray-700">
+                    Refresh Data
+                  </span>
+                </button>
+                <button
+                  onClick={() => setShowSalesTrend(!showSalesTrend)}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors text-left"
+                >
+                  {showSalesTrend ? (
+                    <EyeOff className="h-4 w-4 text-orange-500" />
+                  ) : (
+                    <Eye className="h-4 w-4 text-orange-500" />
+                  )}
+                  <span className="text-sm font-medium text-gray-700">
+                    {showSalesTrend ? "Hide" : "Show"} Sales Trends
+                  </span>
+                </button>
               </div>
             </div>
           </div>
