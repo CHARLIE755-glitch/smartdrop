@@ -62,6 +62,7 @@ const products = [
     category: "Dairy",
     reorderLevel: 50,
     status: "Active",
+    perishable: true,
   },
   {
     sku: "SKU-005678",
@@ -69,6 +70,7 @@ const products = [
     category: "Bakery",
     reorderLevel: 75,
     status: "Active",
+    perishable: true,
   },
   {
     sku: "SKU-009012",
@@ -76,6 +78,7 @@ const products = [
     category: "Beverages",
     reorderLevel: 100,
     status: "Active",
+    perishable: false,
   },
   {
     sku: "SKU-003456",
@@ -83,6 +86,23 @@ const products = [
     category: "Household",
     reorderLevel: 40,
     status: "Discontinued",
+    perishable: false,
+  },
+  {
+    sku: "SKU-007890",
+    name: "Fresh Bananas 3lb",
+    category: "Produce",
+    reorderLevel: 200,
+    status: "Active",
+    perishable: true,
+  },
+  {
+    sku: "SKU-004567",
+    name: "iPhone Charger Cable",
+    category: "Electronics",
+    reorderLevel: 25,
+    status: "Active",
+    perishable: false,
   },
 ];
 
