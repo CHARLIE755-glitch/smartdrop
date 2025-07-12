@@ -334,6 +334,145 @@ export default function Forecast() {
           </Card>
         </div>
 
+        {/* Forecast Results Section */}
+        {showForecast && (
+          <>
+            {/* Stats Summary */}
+            <Card className="mt-8">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="flex items-center gap-2">
+                      📈 Forecast Results
+                      <Badge className="bg-green-100 text-green-800">
+                        {avgConfidence}% Confidence
+                      </Badge>
+                    </CardTitle>
+                    <CardDescription>
+                      AI-generated demand prediction for {selectedSku} (
+                      {forecastPeriod} days)
+                    </CardDescription>
+                  </div>
+                  <Button
+                    onClick={downloadCsv}
+                    variant="outline"
+                    className="border-walmart-blue text-walmart-blue hover:bg-walmart-blue hover:text-white"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download CSV
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-500 rounded-lg">
+                        <TrendingUp className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-blue-600 font-medium">
+                          Total Projected Units
+                        </p>
+                        <p className="text-2xl font-bold text-blue-900">
+                          {totalPredicted.toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`p-6 rounded-xl border ${changePercent >= 0 ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`p-2 rounded-lg ${changePercent >= 0 ? "bg-green-500" : "bg-red-500"}`}
+                      >
+                        {changePercent >= 0 ? (
+                          <ArrowUp className="h-5 w-5 text-white" />
+                        ) : (
+                          <ArrowDown className="h-5 w-5 text-white" />
+                        )}
+                      </div>
+                      <div>
+                        <p
+                          className={`text-sm font-medium ${changePercent >= 0 ? "text-green-600" : "text-red-600"}`}
+                        >
+                          Trend Change
+                        </p>
+                        <p
+                          className={`text-2xl font-bold ${changePercent >= 0 ? "text-green-900" : "text-red-900"}`}
+                        >
+                          {changePercent > 0 ? "+" : ""}
+                          {changePercent}%
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-purple-50 p-6 rounded-xl border border-purple-200">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-purple-500 rounded-lg">
+                        <BarChart3 className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-purple-600 font-medium">
+                          Avg Daily Demand
+                        </p>
+                        <p className="text-2xl font-bold text-purple-900">
+                          {Math.round(
+                            totalPredicted / forecastData.length,
+                          ).toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Chart Section */}
+            <Card className="mt-6">
+              <CardHeader>
+                <CardTitle>Demand Prediction Chart</CardTitle>
+                <CardDescription>
+                  Daily predicted demand over the selected forecast period
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={400}>
+                  <LineChart data={forecastData}>
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      className="opacity-30"
+                    />
+                    <XAxis dataKey="day" fontSize={12} tickMargin={10} />
+                    <YAxis fontSize={12} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "white",
+                        border: "1px solid #e2e8f0",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                      }}
+                    />
+                    <Legend />
+                    <Line
+                      type="monotone"
+                      dataKey="predicted"
+                      stroke="#0071CE"
+                      strokeWidth={3}
+                      name="Predicted Demand"
+                      dot={{ fill: "#0071CE", strokeWidth: 2, r: 4 }}
+                      activeDot={{ r: 6, stroke: "#0071CE", strokeWidth: 2 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </>
+        )}
+
         {/* Feature Preview */}
         <Card className="mt-8">
           <CardHeader>
