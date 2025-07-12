@@ -175,7 +175,7 @@ export default function Admin() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 lg:w-fit">
+          <TabsList className="grid w-full grid-cols-2 lg:w-fit">
             <TabsTrigger value="stores" className="flex items-center gap-2">
               <Building2 className="h-4 w-4" />
               Stores
@@ -183,14 +183,6 @@ export default function Admin() {
             <TabsTrigger value="products" className="flex items-center gap-2">
               <ShoppingCart className="h-4 w-4" />
               Products
-            </TabsTrigger>
-            <TabsTrigger value="supabase" className="flex items-center gap-2">
-              <Building2 className="h-4 w-4" />
-              Supabase Data
-            </TabsTrigger>
-            <TabsTrigger value="auth" className="flex items-center gap-2">
-              <Settings className="h-4 w-4" />
-              Auth Demo
             </TabsTrigger>
           </TabsList>
 
