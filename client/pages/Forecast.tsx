@@ -211,7 +211,7 @@ export default function Forecast() {
                 <Label className="text-sm font-medium text-foreground mb-3 block">
                   Store Selection
                 </Label>
-                <Select>
+                <Select value={selectedStore} onValueChange={setSelectedStore}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select store" />
                   </SelectTrigger>
@@ -236,7 +236,9 @@ export default function Forecast() {
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Search SKU or product"
+                    placeholder="Enter SKU (e.g., SKU-1101)"
+                    value={selectedSku}
+                    onChange={(e) => setSelectedSku(e.target.value)}
                     className="pl-10"
                   />
                 </div>
@@ -246,11 +248,16 @@ export default function Forecast() {
                 <Label className="text-sm font-medium text-foreground mb-3 block">
                   Forecast Period
                 </Label>
-                <Select>
+                <Select
+                  value={forecastPeriod}
+                  onValueChange={setForecastPeriod}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select period" />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem value="7">Next 7 days</SelectItem>
+                    <SelectItem value="14">Next 14 days</SelectItem>
                     <SelectItem value="30">Next 30 days</SelectItem>
                     <SelectItem value="60">Next 60 days</SelectItem>
                     <SelectItem value="90">Next 90 days</SelectItem>
@@ -260,8 +267,15 @@ export default function Forecast() {
             </div>
 
             <div className="mt-6">
-              <Button className="bg-walmart-blue hover:bg-walmart-dark text-white">
-                Generate Forecast
+              <Button
+                onClick={generateForecast}
+                disabled={
+                  loading || !selectedStore || !selectedSku || !forecastPeriod
+                }
+                className="bg-walmart-blue hover:bg-walmart-dark text-white px-8 py-3 text-base font-semibold"
+              >
+                <Play className="h-4 w-4 mr-2" />
+                {loading ? "Generating Forecast..." : "Generate AI Forecast"}
               </Button>
             </div>
           </CardContent>
