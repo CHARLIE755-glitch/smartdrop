@@ -329,11 +329,30 @@ export default function Admin() {
                 </div>
               </CardHeader>
               <CardContent>
+                {/* Enhanced Filters */}
                 <div className="flex items-center gap-4 mb-6">
                   <div className="relative flex-1 max-w-sm">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input placeholder="Search products..." className="pl-10" />
                   </div>
+
+                  <Select
+                    value={perishableFilter}
+                    onValueChange={setPerishableFilter}
+                  >
+                    <SelectTrigger className="w-48">
+                      <SelectValue placeholder="Filter by type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Products</SelectItem>
+                      <SelectItem value="perishable">
+                        🟢 Perishable Only
+                      </SelectItem>
+                      <SelectItem value="non-perishable">
+                        🔵 Non-Perishable Only
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="border border-border rounded-lg overflow-hidden">
@@ -343,45 +362,93 @@ export default function Admin() {
                         <TableHead>SKU</TableHead>
                         <TableHead>Product Name</TableHead>
                         <TableHead>Category</TableHead>
+                        <TableHead>Type</TableHead>
                         <TableHead>Reorder Level</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead className="text-right">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {products.map((product) => (
-                        <TableRow key={product.sku}>
-                          <TableCell className="font-mono text-sm">
-                            {product.sku}
-                          </TableCell>
-                          <TableCell className="font-medium">
-                            {product.name}
-                          </TableCell>
-                          <TableCell>{product.category}</TableCell>
-                          <TableCell>{product.reorderLevel}</TableCell>
-                          <TableCell>
-                            <Badge className={getStatusColor(product.status)}>
-                              {product.status}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <div className="flex items-center gap-2 justify-end">
-                              <Button variant="ghost" size="sm">
-                                <Edit className="h-4 w-4" />
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="text-destructive hover:text-destructive"
+                      {products
+                        .filter((product) => {
+                          if (perishableFilter === "perishable")
+                            return product.perishable;
+                          if (perishableFilter === "non-perishable")
+                            return !product.perishable;
+                          return true;
+                        })
+                        .map((product) => (
+                          <TableRow key={product.sku}>
+                            <TableCell className="font-mono text-sm">
+                              {product.sku}
+                            </TableCell>
+                            <TableCell className="font-medium">
+                              {product.name}
+                            </TableCell>
+                            <TableCell>
+                              <Badge variant="outline" className="font-medium">
+                                {product.category}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              <Badge
+                                className={`${
+                                  product.perishable
+                                    ? "bg-green-100 text-green-800 border-green-200"
+                                    : "bg-blue-100 text-blue-800 border-blue-200"
+                                } font-medium`}
                               >
-                                <Trash2 className="h-4 w-4" />
-                              </Button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                                {product.perishable
+                                  ? "🟢 Perishable"
+                                  : "🔵 Non-Perishable"}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="font-medium">
+                              {product.reorderLevel}
+                            </TableCell>
+                            <TableCell>
+                              <Badge className={getStatusColor(product.status)}>
+                                {product.status}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <div className="flex items-center gap-2 justify-end">
+                                <Button variant="ghost" size="sm">
+                                  <Edit className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-destructive hover:text-destructive"
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
                     </TableBody>
                   </Table>
+                </div>
+
+                {/* Filter Summary */}
+                <div className="mt-4 flex items-center gap-6 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span>
+                      Perishable: {products.filter((p) => p.perishable).length}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <span>
+                      Non-Perishable:{" "}
+                      {products.filter((p) => !p.perishable).length}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span>Total Products: {products.length}</span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
