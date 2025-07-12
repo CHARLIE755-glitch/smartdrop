@@ -42,8 +42,92 @@ import {
   Bar,
 } from "recharts";
 
+// Mock forecast data
+const generateForecastData = (baseValue: number, days: number) => {
+  const data = [];
+  for (let i = 0; i < days; i++) {
+    const trend = Math.sin(i * 0.2) * 20;
+    const noise = (Math.random() - 0.5) * 30;
+    const value = Math.max(0, Math.round(baseValue + trend + noise));
+
+    data.push({
+      day: `Day ${i + 1}`,
+      date: new Date(Date.now() + i * 24 * 60 * 60 * 1000).toLocaleDateString(),
+      predicted: value,
+      confidence: Math.round(85 + Math.random() * 10),
+    });
+  }
+  return data;
+};
+
 export default function Forecast() {
   const navigate = useNavigate();
+  const [selectedStore, setSelectedStore] = useState("");
+  const [selectedSku, setSelectedSku] = useState("");
+  const [forecastPeriod, setForecastPeriod] = useState("");
+  const [showForecast, setShowForecast] = useState(false);
+  const [forecastData, setForecastData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const generateForecast = async () => {
+    if (!selectedStore || !selectedSku || !forecastPeriod) {
+      alert("Please fill in all fields to generate forecast");
+      return;
+    }
+
+    setLoading(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    const days = parseInt(forecastPeriod);
+    const baseValue = 150 + Math.random() * 100;
+    const data = generateForecastData(baseValue, days);
+
+    setForecastData(data);
+    setShowForecast(true);
+    setLoading(false);
+  };
+
+  const downloadCsv = () => {
+    const headers = ["Day", "Date", "Predicted Units", "Confidence %"];
+    const csvContent = [
+      headers.join(","),
+      ...forecastData.map(
+        (row) =>
+          `"${row.day}","${row.date}",${row.predicted},${row.confidence}`,
+      ),
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `forecast-${selectedStore}-${selectedSku}-${new Date().toISOString().split("T")[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
+
+  const totalPredicted = forecastData.reduce(
+    (sum, item) => sum + item.predicted,
+    0,
+  );
+  const avgConfidence = forecastData.length
+    ? Math.round(
+        forecastData.reduce((sum, item) => sum + item.confidence, 0) /
+          forecastData.length,
+      )
+    : 0;
+  const changePercent =
+    forecastData.length > 1
+      ? Math.round(
+          ((forecastData[forecastData.length - 1].predicted -
+            forecastData[0].predicted) /
+            forecastData[0].predicted) *
+            100,
+        )
+      : 0;
 
   return (
     <div className="min-h-screen bg-background">
