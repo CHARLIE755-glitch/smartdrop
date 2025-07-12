@@ -109,6 +109,7 @@ const products = [
 export default function Admin() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("stores");
+  const [perishableFilter, setPerishableFilter] = useState("all");
 
   const getStatusColor = (status: string) => {
     switch (status) {
