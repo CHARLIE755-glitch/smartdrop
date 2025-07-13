@@ -75,17 +75,24 @@ export default function UserInfo() {
 
   const logout = async () => {
     try {
+      console.log("🚪 Signing out user...");
       const { error } = await supabase.auth.signOut();
+
       if (error) {
+        console.error("❌ Signout error:", error);
         toast({
           title: "Error",
           description: "Failed to sign out: " + error.message,
           variant: "destructive",
         });
       } else {
+        console.log("✅ Signout successful");
         setUser(null);
+        // Redirect to auth page after logout
+        window.location.href = "/auth";
       }
-    } catch (err) {
+    } catch (err: any) {
+      console.error("💥 Signout exception:", err);
       toast({
         title: "Error",
         description: "Failed to sign out. Please try again.",
