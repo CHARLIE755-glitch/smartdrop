@@ -634,44 +634,6 @@ export default function Forecast() {
             </div>
           </CardContent>
         </Card>
-
-        {/* Feature Preview */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Coming Soon - Advanced Forecasting Features</CardTitle>
-            <CardDescription>
-              Enhanced AI capabilities for better demand prediction
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 border border-border rounded-lg">
-                <h3 className="font-semibold text-foreground mb-2">
-                  Multi-Factor Analysis
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Weather, events, and economic indicators
-                </p>
-              </div>
-              <div className="p-4 border border-border rounded-lg">
-                <h3 className="font-semibold text-foreground mb-2">
-                  Real-time Updates
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Live forecast adjustments based on current sales
-                </p>
-              </div>
-              <div className="p-4 border border-border rounded-lg">
-                <h3 className="font-semibold text-foreground mb-2">
-                  Confidence Intervals
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Prediction accuracy ranges and risk assessment
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
