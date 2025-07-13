@@ -34,7 +34,7 @@ export default function AuthForm() {
   useEffect(() => {
     const testConnection = async () => {
       try {
-        console.log("��� Testing connections...");
+        console.log("🔗 Testing connections...");
 
         // First, run network diagnostics
         const diagnostics = await networkDiagnostics.runFullDiagnostics(
@@ -373,6 +373,27 @@ export default function AuthForm() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2">
+            {networkStatus.connected ? (
+              <Wifi className="h-4 w-4 text-green-500" />
+            ) : (
+              <WifiOff className="h-4 w-4 text-red-500" />
+            )}
+            <span className="text-xs text-muted-foreground">
+              {networkStatus.connected
+                ? networkStatus.supabaseReachable
+                  ? "Online"
+                  : "Limited"
+                : "Offline"}
+            </span>
+          </div>
+          {networkStatus.lastChecked && (
+            <span className="text-xs text-muted-foreground">
+              Checked: {networkStatus.lastChecked.toLocaleTimeString()}
+            </span>
+          )}
+        </div>
         <CardTitle className="text-center text-walmart-blue">
           Join SmartDrop
         </CardTitle>
