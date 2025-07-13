@@ -395,7 +395,7 @@ export default function AuthForm() {
           )}
         </div>
         <CardTitle className="text-center text-walmart-blue">
-          Join SmartDrop
+          Join Wall-E
         </CardTitle>
         <CardDescription className="text-center">
           Create your account to get started, or sign in if you already have one
@@ -479,7 +479,7 @@ export default function AuthForm() {
           </p>
           <div className="space-y-1 text-xs text-blue-600">
             <div>• admin@walmart.com / password</div>
-            <div>• demo@smartdrop.com / demo123</div>
+            <div>• demo@walle.com / demo123</div>
             <div>• test@example.com / test123</div>
           </div>
         </div>
@@ -519,7 +519,7 @@ export default function AuthForm() {
               </button>
               <button
                 onClick={async () => {
-                  console.log("🧪 Testing auth connection...");
+                  console.log("�� Testing auth connection...");
                   try {
                     const { data, error } = await supabase.auth.getSession();
                     console.log("Session test:", { data, error });
