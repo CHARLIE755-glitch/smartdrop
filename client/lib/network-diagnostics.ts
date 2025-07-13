@@ -129,7 +129,7 @@ export const fallbackAuth = {
       token_type: "bearer",
     };
 
-    localStorage.setItem("smartdrop-demo-session", JSON.stringify(session));
+    localStorage.setItem("walle-demo-session", JSON.stringify(session));
     return session;
   },
 
