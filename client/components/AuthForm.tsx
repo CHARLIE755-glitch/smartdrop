@@ -20,6 +20,42 @@ export default function AuthForm() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
+  // Test Supabase connection on component mount
+  useState(() => {
+    const testConnection = async () => {
+      try {
+        console.log("🔗 Testing Supabase connection...");
+        const { data, error } = await supabase.auth.getSession();
+
+        if (error) {
+          console.error("❌ Supabase connection error:", error);
+          toast({
+            title: "Connection Warning",
+            description:
+              "Having trouble connecting to authentication service. Please refresh the page.",
+            variant: "destructive",
+          });
+        } else {
+          console.log("✅ Supabase connection successful");
+          console.log(
+            "Session:",
+            data.session ? "Active session found" : "No active session",
+          );
+        }
+      } catch (err) {
+        console.error("💥 Connection test failed:", err);
+        toast({
+          title: "Connection Error",
+          description:
+            "Cannot connect to authentication service. Please check your internet connection.",
+          variant: "destructive",
+        });
+      }
+    };
+
+    testConnection();
+  });
+
   // Email validation
   const isValidEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -156,7 +192,7 @@ export default function AuthForm() {
         password,
       });
 
-      console.log("��� Signin response:", { data, error });
+      console.log("📋 Signin response:", { data, error });
 
       if (error) {
         console.error("❌ Signin error:", error);
