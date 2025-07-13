@@ -21,7 +21,7 @@ export default function AuthForm() {
   const { toast } = useToast();
 
   // Test Supabase connection on component mount
-  useState(() => {
+  useEffect(() => {
     const testConnection = async () => {
       try {
         console.log("🔗 Testing Supabase connection...");
@@ -54,7 +54,7 @@ export default function AuthForm() {
     };
 
     testConnection();
-  });
+  }, [toast]);
 
   // Email validation
   const isValidEmail = (email: string) => {
