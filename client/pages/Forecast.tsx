@@ -361,59 +361,6 @@ export default function Forecast() {
           </CardContent>
         </Card>
 
-        {/* Placeholder Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-walmart-blue" />
-                Time Series Analysis
-              </CardTitle>
-              <CardDescription>
-                Detailed forecast charts will be displayed here
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="h-64 bg-gradient-to-br from-walmart-light to-white rounded-lg border border-border flex items-center justify-center">
-                <div className="text-center">
-                  <BarChart3 className="h-12 w-12 text-walmart-blue mx-auto mb-4" />
-                  <p className="text-muted-foreground font-medium">
-                    Forecast Chart Placeholder
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Interactive time-series visualization
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-walmart-blue" />
-                Seasonal Patterns
-              </CardTitle>
-              <CardDescription>
-                Historical demand patterns and seasonality trends
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="h-64 bg-gradient-to-br from-walmart-yellow/10 to-white rounded-lg border border-border flex items-center justify-center">
-                <div className="text-center">
-                  <Calendar className="h-12 w-12 text-walmart-yellow mx-auto mb-4" />
-                  <p className="text-muted-foreground font-medium">
-                    Seasonal Analysis Placeholder
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Pattern recognition and trends
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
         {/* Forecast Results Section */}
         {showForecast && (
           <>
