@@ -218,16 +218,11 @@ export default function Forecast() {
             <div className="flex items-center">
               <Link to="/dashboard" className="flex items-center gap-3 ml-4">
                 <div>
-                  <div className="flex items-center gap-3">
-                    <img
-                      src="https://cdn.builder.io/api/v1/image/assets%2F4cbca4b77bf64fb889cd6f8b4523b770%2F4dbe26d9efbf4fdf98f7e6391b9ff452?format=webp&width=800"
-                      alt="Wall-E Logo"
-                      className="h-8 w-auto"
-                    />
-                    <h1 className="text-xl font-bold text-walmart-blue">
-                      Wall-E
-                    </h1>
-                  </div>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets%2F4cbca4b77bf64fb889cd6f8b4523b770%2F4dbe26d9efbf4fdf98f7e6391b9ff452?format=webp&width=800"
+                    alt="Wall-E Logo"
+                    className="h-8 w-auto"
+                  />
                   <p className="text-xs text-muted-foreground -mt-1">
                     Inventory Intelligence
                   </p>
