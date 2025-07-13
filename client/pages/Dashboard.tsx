@@ -461,7 +461,10 @@ export default function Dashboard() {
               </div>
               <Select value={selectedStore} onValueChange={setSelectedStore}>
                 <SelectTrigger className="w-full h-11 border-2 border-gray-200 hover:border-walmart-blue transition-colors">
-                  <SelectValue placeholder="Select store location" />
+                  <SelectValue
+                    placeholder="Select store location"
+                    className="truncate"
+                  />
                 </SelectTrigger>
                 <SelectContent>
                   {stores.map((store) => (
