@@ -19,6 +19,15 @@ export default function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [networkStatus, setNetworkStatus] = useState<{
+    connected: boolean;
+    supabaseReachable: boolean;
+    lastChecked: Date | null;
+  }>({
+    connected: true,
+    supabaseReachable: true,
+    lastChecked: null,
+  });
   const { toast } = useToast();
 
   // Test Supabase connection on component mount
