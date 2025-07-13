@@ -54,9 +54,9 @@ export default function Login() {
         <div className="text-center mb-8">
           <div className="mb-4">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets%2F4cbca4b77bf64fb889cd6f8b4523b770%2F4dbe26d9efbf4fdf98f7e6391b9ff452?format=webp&width=800"
+              src="https://cdn.builder.io/api/v1/image/assets%2F4cbca4b77bf64fb889cd6f8b4523b770%2F00ad125eb823452ba53e316226a0c182?format=webp&width=800"
               alt="Wall-E Logo"
-              className="h-48 w-auto mx-auto mb-2"
+              className="h-24 w-auto mx-auto mb-2"
             />
             <p className="text-sm text-muted-foreground">
               Inventory Intelligence
