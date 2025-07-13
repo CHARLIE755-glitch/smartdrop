@@ -134,7 +134,7 @@ export const fallbackAuth = {
   },
 
   getDemoSession() {
-    const stored = localStorage.getItem("smartdrop-demo-session");
+    const stored = localStorage.getItem("walle-demo-session");
     if (!stored) return null;
 
     try {
