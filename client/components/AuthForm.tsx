@@ -149,6 +149,12 @@ export default function AuthForm() {
     try {
       console.log("📧 Attempting to sign up with email:", email);
 
+      // Check network status first
+      if (!networkStatus.connected) {
+        throw new Error("No internet connection");
+      }
+
+      // Try Supabase signup
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -158,6 +164,14 @@ export default function AuthForm() {
 
       if (error) {
         console.error("❌ Signup error:", error);
+
+        // Check if it's a network error
+        if (
+          error.message.includes("Failed to fetch") ||
+          error.name === "AuthRetryableFetchError"
+        ) {
+          throw new Error("Network connection failed");
+        }
 
         // Handle specific error types
         let errorMessage = error.message;
@@ -192,19 +206,34 @@ export default function AuthForm() {
       }
     } catch (err: any) {
       console.error("💥 Signup exception:", err);
-      toast({
-        title: "Network Error",
-        description:
-          "Failed to connect to authentication service. Please check your internet connection.",
-        variant: "destructive",
-      });
+
+      // Check if this is a network error - offer demo mode
+      if (
+        err.message.includes("Failed to fetch") ||
+        err.message.includes("Network connection failed") ||
+        err.message.includes("No internet connection")
+      ) {
+        toast({
+          title: "Connection Failed",
+          description:
+            "Can't reach authentication servers. Try demo mode below or check your connection.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Signup Error",
+          description:
+            "Failed to create account. Please try again or use demo mode.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setLoading(false);
     }
   };
 
   const signIn = async () => {
-    console.log("�� Starting signin process...");
+    console.log("🔐 Starting signin process...");
 
     // Validation
     if (!email || !password) {
