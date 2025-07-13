@@ -21,10 +21,20 @@ export default function UserInfo() {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const { data } = await supabase.auth.getUser();
-        setUser(data?.user || null);
+        console.log("👤 Checking current user session...");
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error) {
+          console.error("❌ Error fetching user:", error);
+        } else {
+          console.log(
+            "📋 Current user:",
+            data?.user ? `${data.user.email}` : "No user",
+          );
+          setUser(data?.user || null);
+        }
       } catch (error) {
-        console.error("Error fetching user:", error);
+        console.error("💥 Exception fetching user:", error);
       } finally {
         setLoading(false);
       }
@@ -36,6 +46,11 @@ export default function UserInfo() {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log(
+        "🔄 Auth state change:",
+        event,
+        session?.user?.email || "no user",
+      );
       setUser(session?.user || null);
 
       if (event === "SIGNED_IN") {
@@ -48,6 +63,10 @@ export default function UserInfo() {
           title: "Goodbye!",
           description: "You have been signed out.",
         });
+      } else if (event === "TOKEN_REFRESHED") {
+        console.log("🔄 Token refreshed");
+      } else if (event === "USER_UPDATED") {
+        console.log("👤 User updated");
       }
     });
 
