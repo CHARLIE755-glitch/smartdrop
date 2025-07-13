@@ -147,6 +147,7 @@ export default function Forecast() {
   const [showForecast, setShowForecast] = useState(false);
   const [forecastData, setForecastData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState("january");
 
   const generateForecast = async () => {
     if (!selectedStore || !selectedSku || !forecastPeriod) {
