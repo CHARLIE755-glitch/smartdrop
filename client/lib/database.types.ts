@@ -1,4 +1,4 @@
-// Database types for SmartDrop Supabase tables
+// Database types for Wall-E Supabase tables
 
 export interface Store {
   id: string;
