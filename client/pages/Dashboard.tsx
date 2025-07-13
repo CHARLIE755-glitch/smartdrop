@@ -691,70 +691,192 @@ export default function Dashboard() {
               </Card>
             </div>
 
-            {/* Reorder Table */}
+            {/* Enhanced Reorder Recommendations */}
             <Card>
               <CardHeader>
-                <CardTitle>Reorder Recommendations</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  🤖 Smart Reorder Recommendations
+                  <Badge className="bg-purple-100 text-purple-800">
+                    AI-Powered
+                  </Badge>
+                </CardTitle>
                 <CardDescription>
-                  Products requiring immediate attention based on AI predictions
+                  Intelligent stock predictions with optimal quantities and
+                  timing recommendations
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b border-border">
-                        <th className="text-left p-4 font-medium text-muted-foreground">
-                          SKU
-                        </th>
-                        <th className="text-left p-4 font-medium text-muted-foreground">
-                          Product
-                        </th>
-                        <th className="text-left p-4 font-medium text-muted-foreground">
-                          Current Stock
-                        </th>
-                        <th className="text-left p-4 font-medium text-muted-foreground">
-                          Predicted Demand
-                        </th>
-                        <th className="text-left p-4 font-medium text-muted-foreground">
-                          Status
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {reorderData.map((item) => (
-                        <tr
-                          key={item.sku}
-                          className="border-b border-border hover:bg-muted/50 transition-colors"
+                <div className="space-y-6">
+                  {reorderData.map((item) => (
+                    <div
+                      key={item.sku}
+                      className={`border-2 rounded-xl p-6 transition-all hover:shadow-lg ${
+                        item.status === "critical"
+                          ? "border-red-200 bg-red-50/50"
+                          : item.status === "low"
+                            ? "border-amber-200 bg-amber-50/50"
+                            : "border-green-200 bg-green-50/50"
+                      }`}
+                    >
+                      {/* Product Header */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`w-4 h-4 rounded-full ${
+                              item.status === "critical"
+                                ? "bg-red-500"
+                                : item.status === "low"
+                                  ? "bg-amber-500"
+                                  : "bg-green-500"
+                            }`}
+                          />
+                          <div>
+                            <h3 className="font-bold text-lg text-gray-900">
+                              {item.product}
+                            </h3>
+                            <p className="text-sm text-gray-600 font-mono">
+                              {item.sku}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <Badge
+                            className={`${getStatusColor(item.status)} text-sm font-semibold px-3 py-1`}
+                          >
+                            {item.status === "critical" && "🚨 URGENT"}
+                            {item.status === "low" && "⚠️ MONITOR"}
+                            {item.status === "good" && "✅ SUFFICIENT"}
+                          </Badge>
+                        </div>
+                      </div>
+
+                      {/* Smart Analytics Grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* 1. Optimal Stock Quantity */}
+                        <div className="bg-white rounded-lg p-4 border border-gray-200">
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="p-1.5 bg-blue-100 rounded-lg">
+                              <TrendingUp className="h-4 w-4 text-blue-600" />
+                            </div>
+                            <h4 className="font-semibold text-gray-800">
+                              📊 Optimal Stock
+                            </h4>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span className="text-sm text-gray-600">
+                                Current:
+                              </span>
+                              <span className="font-bold">
+                                {item.stock} units
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-sm text-gray-600">
+                                Recommended:
+                              </span>
+                              <span className="font-bold text-blue-600">
+                                {item.optimalStock} units
+                              </span>
+                            </div>
+                            <div className="text-xs text-gray-500 pt-2 border-t">
+                              Formula: Current ({item.stock}) + Forecast (
+                              {item.predicted}) - Buffer ({item.safetyStock})
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* 2. When to Order */}
+                        <div className="bg-white rounded-lg p-4 border border-gray-200">
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="p-1.5 bg-orange-100 rounded-lg">
+                              <Calendar className="h-4 w-4 text-orange-600" />
+                            </div>
+                            <h4 className="font-semibold text-gray-800">
+                              ⏰ Reorder Timing
+                            </h4>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span className="text-sm text-gray-600">
+                                Reorder Date:
+                              </span>
+                              <span className="font-bold text-orange-600">
+                                {item.reorderDate}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-sm text-gray-600">
+                                Lead Time:
+                              </span>
+                              <span className="font-medium">
+                                {item.supplierLeadTime}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-sm text-gray-600">
+                                Stockout Risk:
+                              </span>
+                              <span
+                                className={`font-bold ${item.daysUntilStockout <= 3 ? "text-red-600" : "text-green-600"}`}
+                              >
+                                {item.daysUntilStockout} days
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* 3. How Much to Order */}
+                        <div className="bg-white rounded-lg p-4 border border-gray-200">
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="p-1.5 bg-green-100 rounded-lg">
+                              <CheckCircle className="h-4 w-4 text-green-600" />
+                            </div>
+                            <h4 className="font-semibold text-gray-800">
+                              📦 Smart Quantity
+                            </h4>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span className="text-sm text-gray-600">
+                                Order Qty:
+                              </span>
+                              <span className="font-bold text-green-600 text-lg">
+                                {item.reorderQuantity} units
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-sm text-gray-600">
+                                Daily Demand:
+                              </span>
+                              <span className="font-medium">
+                                {item.dailyDemand}/day
+                              </span>
+                            </div>
+                            <div className="text-xs text-gray-500 pt-2 border-t">
+                              ({item.dailyDemand} × {item.leadTimeDays} days) +{" "}
+                              {item.safetyStock} safety - {item.stock} current
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Action Button */}
+                      <div className="mt-4 flex justify-end">
+                        <Button
+                          className={`${
+                            item.status === "critical"
+                              ? "bg-red-600 hover:bg-red-700"
+                              : "bg-walmart-blue hover:bg-walmart-dark"
+                          } text-white font-semibold px-6`}
                         >
-                          <td className="p-4 font-mono text-sm">{item.sku}</td>
-                          <td className="p-4 font-medium">{item.product}</td>
-                          <td className="p-4">
-                            <span
-                              className={`font-semibold ${
-                                item.stock < item.reorderPoint
-                                  ? "text-status-danger"
-                                  : "text-foreground"
-                              }`}
-                            >
-                              {item.stock}
-                            </span>
-                          </td>
-                          <td className="p-4">{item.predicted}</td>
-                          <td className="p-4">
-                            <Badge
-                              className={`${getStatusColor(
-                                item.status,
-                              )} flex items-center gap-1 w-fit`}
-                            >
-                              {getStatusIcon(item.status)}
-                              {item.status}
-                            </Badge>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                          {item.status === "critical"
+                            ? "🚨 Order Now"
+                            : "📋 Create Order"}
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
