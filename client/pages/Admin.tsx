@@ -176,7 +176,7 @@ export default function Admin() {
 
             <div className="flex items-center">
               <Button
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/auth")}
                 variant="outline"
                 size="sm"
                 className="border-walmart-blue text-walmart-blue hover:bg-walmart-blue hover:text-white"
