@@ -7,6 +7,19 @@ import UserInfo from "@/components/UserInfo";
 export default function Auth() {
   const navigate = useNavigate();
 
+  // Debug environment variables in development
+  if (import.meta.env.DEV) {
+    console.log("🔧 Environment Variables Check:");
+    console.log(
+      "VITE_SUPABASE_URL:",
+      import.meta.env.VITE_SUPABASE_URL ? "✅ Set" : "❌ Missing",
+    );
+    console.log(
+      "VITE_SUPABASE_ANON_KEY:",
+      import.meta.env.VITE_SUPABASE_ANON_KEY ? "✅ Set" : "❌ Missing",
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-walmart-light via-white to-walmart-light">
       {/* Top Navigation */}
