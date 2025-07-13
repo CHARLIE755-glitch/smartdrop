@@ -124,7 +124,11 @@ export default function AuthForm() {
   };
 
   const signIn = async () => {
+    console.log("🔐 Starting signin process...");
+
+    // Validation
     if (!email || !password) {
+      console.log("❌ Missing email or password");
       toast({
         title: "Error",
         description: "Please fill in all fields",
@@ -133,30 +137,71 @@ export default function AuthForm() {
       return;
     }
 
+    if (!isValidEmail(email)) {
+      console.log("❌ Invalid email format");
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
     try {
+      console.log("🔑 Attempting to sign in with email:", email);
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
+      console.log("��� Signin response:", { data, error });
+
       if (error) {
+        console.error("❌ Signin error:", error);
+
+        // Handle specific error types
+        let errorMessage = error.message;
+        if (error.message.includes("Invalid login credentials")) {
+          errorMessage = "Incorrect email or password. Please try again.";
+        } else if (error.message.includes("Email not confirmed")) {
+          errorMessage =
+            "Please check your email and click the confirmation link before signing in.";
+        } else if (error.message.includes("User not found")) {
+          errorMessage =
+            "No account found with this email. Please sign up first.";
+        } else if (error.message.includes("invalid email")) {
+          errorMessage = "Please enter a valid email address.";
+        } else if (error.message.includes("Too many requests")) {
+          errorMessage =
+            "Too many login attempts. Please wait a moment and try again.";
+        }
+
         toast({
           title: "Login Error",
-          description: error.message,
+          description: errorMessage,
           variant: "destructive",
         });
       } else {
-        toast({
-          title: "Success",
-          description: "Logged in successfully!",
-        });
-        console.log("User logged in:", data);
+        console.log("✅ Signin successful:", data);
+
+        if (data.user) {
+          toast({
+            title: "Welcome back!",
+            description: `Successfully logged in as ${data.user.email}`,
+          });
+
+          // Redirect to dashboard on successful login
+          window.location.href = "/dashboard";
+        }
       }
-    } catch (err) {
+    } catch (err: any) {
+      console.error("💥 Signin exception:", err);
       toast({
-        title: "Error",
-        description: "Failed to log in. Please try again.",
+        title: "Network Error",
+        description:
+          "Failed to connect to authentication service. Please check your internet connection.",
         variant: "destructive",
       });
     } finally {
