@@ -394,9 +394,7 @@ export default function AuthForm() {
             </span>
           )}
         </div>
-        <CardTitle className="text-center text-walmart-blue">
-          Join Wall-E
-        </CardTitle>
+        <CardTitle className="text-center text-walmart-blue">Join Us</CardTitle>
         <CardDescription className="text-center">
           Create your account to get started, or sign in if you already have one
         </CardDescription>
@@ -519,7 +517,7 @@ export default function AuthForm() {
               </button>
               <button
                 onClick={async () => {
-                  console.log("�� Testing auth connection...");
+                  console.log("🧪 Testing auth connection...");
                   try {
                     const { data, error } = await supabase.auth.getSession();
                     console.log("Session test:", { data, error });
