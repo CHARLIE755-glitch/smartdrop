@@ -87,7 +87,7 @@ export default function AddStore() {
           Add New Store
         </CardTitle>
         <CardDescription>
-          Add a new store location to the SmartDrop system
+          Add a new store location to the Wall-E system
         </CardDescription>
       </CardHeader>
       <CardContent>
