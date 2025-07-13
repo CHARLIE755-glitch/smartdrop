@@ -322,6 +322,54 @@ export default function AuthForm() {
             </Button>
           </TabsContent>
         </Tabs>
+
+        {/* Debug Section - Remove in production */}
+        {import.meta.env.DEV && (
+          <div className="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+            <h4 className="text-xs font-semibold text-gray-600 mb-2">
+              🔧 Debug Tools
+            </h4>
+            <div className="flex gap-2">
+              <button
+                onClick={async () => {
+                  console.log("🧪 Testing auth connection...");
+                  try {
+                    const { data, error } = await supabase.auth.getSession();
+                    console.log("Session test:", { data, error });
+                    toast({
+                      title: "Debug",
+                      description: error
+                        ? `Error: ${error.message}`
+                        : "Connection OK",
+                      variant: error ? "destructive" : "default",
+                    });
+                  } catch (err: any) {
+                    console.error("Debug test failed:", err);
+                    toast({
+                      title: "Debug Error",
+                      description: err.message,
+                      variant: "destructive",
+                    });
+                  }
+                }}
+                className="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200"
+              >
+                Test Connection
+              </button>
+              <button
+                onClick={() => {
+                  console.log("🔍 Current values:");
+                  console.log("Email:", email);
+                  console.log("Password length:", password.length);
+                  console.log("Loading:", loading);
+                }}
+                className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded hover:bg-green-200"
+              >
+                Log Values
+              </button>
+            </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
