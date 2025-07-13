@@ -52,13 +52,13 @@ export default function Auth() {
 
             <div className="flex items-center">
               <Button
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/dashboard")}
                 variant="outline"
                 size="sm"
                 className="border-walmart-blue text-walmart-blue hover:bg-walmart-blue hover:text-white"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Login
+                Go to Dashboard
               </Button>
             </div>
           </div>
