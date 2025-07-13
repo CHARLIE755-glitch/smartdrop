@@ -34,7 +34,7 @@ export default function AuthForm() {
   useEffect(() => {
     const testConnection = async () => {
       try {
-        console.log("🔗 Testing connections...");
+        console.log("��� Testing connections...");
 
         // First, run network diagnostics
         const diagnostics = await networkDiagnostics.runFullDiagnostics(
@@ -260,6 +260,32 @@ export default function AuthForm() {
     try {
       console.log("🔑 Attempting to sign in with email:", email);
 
+      // Check for demo credentials first
+      if (fallbackAuth.validateDemoCredentials(email, password)) {
+        console.log("🎭 Using demo authentication for:", email);
+
+        // Set demo session
+        const session = fallbackAuth.setDemoSession(email);
+
+        toast({
+          title: "Demo Login Successful!",
+          description: `Logged in as ${email} (Demo Mode)`,
+        });
+
+        // Redirect to dashboard
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 1000);
+
+        return;
+      }
+
+      // Check network status
+      if (!networkStatus.connected) {
+        throw new Error("No internet connection");
+      }
+
+      // Try Supabase signin
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -270,16 +296,25 @@ export default function AuthForm() {
       if (error) {
         console.error("❌ Signin error:", error);
 
+        // Check if it's a network error
+        if (
+          error.message.includes("Failed to fetch") ||
+          error.name === "AuthRetryableFetchError"
+        ) {
+          throw new Error("Network connection failed");
+        }
+
         // Handle specific error types
         let errorMessage = error.message;
         if (error.message.includes("Invalid login credentials")) {
-          errorMessage = "Incorrect email or password. Please try again.";
+          errorMessage =
+            "Incorrect email or password. Try demo credentials: admin@walmart.com / password";
         } else if (error.message.includes("Email not confirmed")) {
           errorMessage =
             "Please check your email and click the confirmation link before signing in.";
         } else if (error.message.includes("User not found")) {
           errorMessage =
-            "No account found with this email. Please sign up first.";
+            "No account found with this email. Please sign up first or try demo mode.";
         } else if (error.message.includes("invalid email")) {
           errorMessage = "Please enter a valid email address.";
         } else if (error.message.includes("Too many requests")) {
@@ -302,17 +337,34 @@ export default function AuthForm() {
           });
 
           // Redirect to dashboard on successful login
-          window.location.href = "/dashboard";
+          setTimeout(() => {
+            window.location.href = "/dashboard";
+          }, 1000);
         }
       }
     } catch (err: any) {
       console.error("💥 Signin exception:", err);
-      toast({
-        title: "Network Error",
-        description:
-          "Failed to connect to authentication service. Please check your internet connection.",
-        variant: "destructive",
-      });
+
+      // Check if this is a network error - offer demo mode
+      if (
+        err.message.includes("Failed to fetch") ||
+        err.message.includes("Network connection failed") ||
+        err.message.includes("No internet connection")
+      ) {
+        toast({
+          title: "Connection Failed",
+          description:
+            "Can't reach authentication servers. Try demo credentials: admin@walmart.com / password",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Login Error",
+          description:
+            "Failed to sign in. Please try again or use demo credentials.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setLoading(false);
     }
