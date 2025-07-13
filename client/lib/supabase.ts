@@ -4,11 +4,37 @@ import type { Database } from "./database.types";
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+// Debug environment variables
+console.log("🔧 Supabase Configuration Check:");
+console.log("URL exists:", !!supabaseUrl);
+console.log("Key exists:", !!supabaseAnonKey);
+console.log(
+  "URL:",
+  supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : "MISSING",
+);
+
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error("Missing Supabase environment variables");
+  console.error("❌ Missing Supabase environment variables:");
+  console.error(
+    "VITE_SUPABASE_URL:",
+    supabaseUrl ? "✅ Present" : "❌ Missing",
+  );
+  console.error(
+    "VITE_SUPABASE_ANON_KEY:",
+    supabaseAnonKey ? "✅ Present" : "❌ Missing",
+  );
+  throw new Error(
+    "Missing Supabase environment variables. Please check your .env file.",
+  );
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+  },
+});
 
 // Helper functions for common operations
 export const auth = supabase.auth;
