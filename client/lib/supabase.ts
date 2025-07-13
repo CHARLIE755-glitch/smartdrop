@@ -8,10 +8,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 console.log("🔧 Supabase Configuration Check:");
 console.log("URL exists:", !!supabaseUrl);
 console.log("Key exists:", !!supabaseAnonKey);
-console.log(
-  "URL:",
-  supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : "MISSING",
-);
+console.log("Full URL:", supabaseUrl);
 
 if (!supabaseUrl || !supabaseAnonKey) {
   console.error("❌ Missing Supabase environment variables:");
@@ -26,6 +23,15 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error(
     "Missing Supabase environment variables. Please check your .env file.",
   );
+}
+
+// Validate URL format
+try {
+  new URL(supabaseUrl);
+  console.log("✅ URL format is valid");
+} catch (error) {
+  console.error("❌ Invalid URL format:", supabaseUrl);
+  throw new Error("Invalid Supabase URL format");
 }
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
