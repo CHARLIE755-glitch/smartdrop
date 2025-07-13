@@ -158,7 +158,7 @@ export const fallbackAuth = {
   validateDemoCredentials(email: string, password: string): boolean {
     const validCombos = [
       { email: "admin@walmart.com", password: "password" },
-      { email: "demo@smartdrop.com", password: "demo123" },
+      { email: "demo@walle.com", password: "demo123" },
       { email: "test@example.com", password: "test123" },
     ];
 
