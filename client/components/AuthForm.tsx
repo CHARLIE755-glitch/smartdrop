@@ -20,8 +20,23 @@ export default function AuthForm() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
+  // Email validation
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Password validation
+  const isValidPassword = (password: string) => {
+    return password.length >= 6;
+  };
+
   const signUp = async () => {
+    console.log("🚀 Starting signup process...");
+
+    // Validation
     if (!email || !password) {
+      console.log("❌ Missing email or password");
       toast({
         title: "Error",
         description: "Please fill in all fields",
@@ -30,30 +45,77 @@ export default function AuthForm() {
       return;
     }
 
+    if (!isValidEmail(email)) {
+      console.log("❌ Invalid email format");
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      console.log("❌ Password too weak");
+      toast({
+        title: "Weak Password",
+        description: "Password must be at least 6 characters long",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
     try {
+      console.log("📧 Attempting to sign up with email:", email);
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
 
+      console.log("📋 Signup response:", { data, error });
+
       if (error) {
+        console.error("❌ Signup error:", error);
+
+        // Handle specific error types
+        let errorMessage = error.message;
+        if (error.message.includes("already registered")) {
+          errorMessage =
+            "This email is already registered. Try signing in instead.";
+        } else if (error.message.includes("invalid email")) {
+          errorMessage = "Please enter a valid email address.";
+        } else if (error.message.includes("password")) {
+          errorMessage = "Password must be at least 6 characters long.";
+        }
+
         toast({
           title: "Signup Error",
-          description: error.message,
+          description: errorMessage,
           variant: "destructive",
         });
       } else {
+        console.log("✅ Signup successful:", data);
         toast({
           title: "Signup Successful!",
-          description: "Check your email to confirm your account.",
+          description: data.user?.email_confirmed_at
+            ? "Account created successfully! You can now sign in."
+            : "Check your email to confirm your account before signing in.",
         });
-        console.log("User signed up:", data);
+
+        // Clear form on success
+        if (data.user && !data.user.email_confirmed_at) {
+          setEmail("");
+          setPassword("");
+        }
       }
-    } catch (err) {
+    } catch (err: any) {
+      console.error("💥 Signup exception:", err);
       toast({
-        title: "Error",
-        description: "Failed to sign up. Please try again.",
+        title: "Network Error",
+        description:
+          "Failed to connect to authentication service. Please check your internet connection.",
         variant: "destructive",
       });
     } finally {
