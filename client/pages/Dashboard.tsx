@@ -466,9 +466,9 @@ export default function Dashboard() {
                 <SelectContent>
                   {stores.map((store) => (
                     <SelectItem key={store.id} value={store.id}>
-                      <div className="flex items-center gap-3 py-1">
+                      <div className="flex items-center gap-3 py-1 max-w-full">
                         <div
-                          className={`w-2.5 h-2.5 rounded-full ${
+                          className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${
                             store.status === "good"
                               ? "bg-green-500"
                               : store.status === "warning"
@@ -476,7 +476,12 @@ export default function Dashboard() {
                                 : "bg-red-500"
                           }`}
                         />
-                        <span className="font-medium">{store.name}</span>
+                        <span
+                          className="font-medium truncate"
+                          title={store.name}
+                        >
+                          {store.name}
+                        </span>
                       </div>
                     </SelectItem>
                   ))}
