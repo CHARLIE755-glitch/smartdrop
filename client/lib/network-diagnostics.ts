@@ -110,7 +110,7 @@ export const fallbackAuth = {
   // Mock user data for offline demo
   mockUser: {
     id: "demo-user-123",
-    email: "demo@smartdrop.com",
+    email: "demo@walle.com",
     created_at: new Date().toISOString(),
     email_confirmed_at: new Date().toISOString(),
     last_sign_in_at: new Date().toISOString(),
