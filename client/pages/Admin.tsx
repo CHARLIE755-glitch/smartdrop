@@ -141,9 +141,9 @@ export default function Admin() {
               <Link to="/dashboard" className="flex items-center gap-3 ml-4">
                 <div>
                   <img
-                    src="https://cdn.builder.io/api/v1/image/assets%2F4cbca4b77bf64fb889cd6f8b4523b770%2F4dbe26d9efbf4fdf98f7e6391b9ff452?format=webp&width=800"
+                    src="https://cdn.builder.io/api/v1/image/assets%2F4cbca4b77bf64fb889cd6f8b4523b770%2F00ad125eb823452ba53e316226a0c182?format=webp&width=800"
                     alt="Wall-E Logo"
-                    className="h-40 w-auto"
+                    className="h-12 w-auto"
                   />
                   <p className="text-xs text-muted-foreground -mt-1">
                     Inventory Intelligence
