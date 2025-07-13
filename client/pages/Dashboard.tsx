@@ -505,27 +505,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Date Range Section */}
-            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-blue-50 rounded-lg">
-                  <Calendar className="h-4 w-4 text-walmart-blue" />
-                </div>
-                <Label className="text-sm font-bold text-gray-800 uppercase tracking-wide">
-                  Time Period
-                </Label>
-              </div>
-              <div className="space-y-3">
-                <button className="w-full flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg hover:border-walmart-blue hover:bg-walmart-blue/5 transition-all duration-200 group">
-                  <Calendar className="h-4 w-4 text-gray-500 group-hover:text-walmart-blue" />
-                  <span className="text-sm font-medium text-gray-700 group-hover:text-walmart-blue">
-                    Last 30 days
-                  </span>
-                  <ChevronDown className="h-4 w-4 text-gray-400 ml-auto group-hover:text-walmart-blue" />
-                </button>
-              </div>
-            </div>
-
             {/* Smart Filters Section */}
             <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div className="flex items-center gap-3 mb-4">
@@ -873,7 +852,7 @@ export default function Dashboard() {
                               <TrendingUp className="h-4 w-4 text-blue-600" />
                             </div>
                             <h4 className="font-semibold text-gray-800">
-                              📊 Optimal Stock
+                              ���� Optimal Stock
                             </h4>
                           </div>
                           <div className="space-y-2">
