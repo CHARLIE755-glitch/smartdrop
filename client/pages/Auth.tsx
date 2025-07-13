@@ -95,25 +95,29 @@ export default function Auth() {
           {/* Instructions */}
           <div className="mt-12 bg-white/50 backdrop-blur-sm rounded-lg p-6 border border-border">
             <h2 className="text-lg font-semibold text-foreground mb-4">
-              🧪 How to Test:
+              🚀 Getting Started:
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
               <div>
-                <h3 className="font-medium text-foreground mb-2">Sign Up:</h3>
+                <h3 className="font-medium text-foreground mb-2">
+                  New User? Sign Up:
+                </h3>
                 <ul className="space-y-1">
-                  <li>• Enter a valid email address</li>
-                  <li>• Choose a secure password (6+ chars)</li>
-                  <li>• Click "Sign Up"</li>
-                  <li>• Check email for confirmation link</li>
+                  <li>• Enter your business email address</li>
+                  <li>• Create a secure password (6+ characters)</li>
+                  <li>• Click "Sign Up" to create your account</li>
+                  <li>• Check your email for confirmation</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-medium text-foreground mb-2">Sign In:</h3>
+                <h3 className="font-medium text-foreground mb-2">
+                  Existing User? Sign In:
+                </h3>
                 <ul className="space-y-1">
-                  <li>• Use registered email & password</li>
-                  <li>• Click "Sign In"</li>
-                  <li>• View user info in right panel</li>
-                  <li>• Use "Sign Out" to logout</li>
+                  <li>• Enter your registered email & password</li>
+                  <li>• Click "Sign In" to access your dashboard</li>
+                  <li>• Or use demo: admin@walmart.com / password</li>
+                  <li>• Access full inventory management features</li>
                 </ul>
               </div>
             </div>
