@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, ArrowRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 export default function Login() {
