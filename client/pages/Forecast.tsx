@@ -60,6 +60,85 @@ const generateForecastData = (baseValue: number, days: number) => {
   return data;
 };
 
+// Seasonal trending data
+const upcomingTrends = {
+  january: [
+    {
+      category: "Cold Beverages",
+      change: "+35%",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+    {
+      category: "Heaters & Warmers",
+      change: "+28%",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+    {
+      category: "Winter Clothing",
+      change: "+22%",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+    {
+      category: "Ice Cream",
+      change: "-15%",
+      color: "text-red-600",
+      bgColor: "bg-red-100",
+    },
+  ],
+  february: [
+    {
+      category: "Valentine's Day Items",
+      change: "+45%",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+    {
+      category: "Chocolate & Candy",
+      change: "+38%",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+    {
+      category: "Red & Pink Apparel",
+      change: "+25%",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+  ],
+  march: [
+    {
+      category: "Spring Cleaning",
+      change: "+40%",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+    {
+      category: "Gardening Supplies",
+      change: "+32%",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+    {
+      category: "Allergy Medications",
+      change: "+28%",
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+    },
+  ],
+};
+
+const seasonalData = [
+  { month: "Jan", beverages: 135, seasonal: 180, clothing: 95 },
+  { month: "Feb", beverages: 125, seasonal: 220, clothing: 110 },
+  { month: "Mar", beverages: 140, seasonal: 190, clothing: 130 },
+  { month: "Apr", beverages: 155, seasonal: 160, clothing: 145 },
+  { month: "May", beverages: 175, seasonal: 140, clothing: 160 },
+  { month: "Jun", beverages: 195, seasonal: 120, clothing: 180 },
+];
+
 export default function Forecast() {
   const navigate = useNavigate();
   const [selectedStore, setSelectedStore] = useState("");
