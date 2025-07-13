@@ -151,7 +151,7 @@ export const fallbackAuth = {
   },
 
   clearDemoSession() {
-    localStorage.removeItem("smartdrop-demo-session");
+    localStorage.removeItem("walle-demo-session");
   },
 
   // Validate demo credentials
