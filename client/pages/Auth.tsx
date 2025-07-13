@@ -130,6 +130,14 @@ export default function Auth() {
                   <li>• Enter your registered email & password</li>
                   <li>• Click "Sign In" to access your dashboard</li>
                   <li>• Or use demo: admin@walmart.com / password</li>
+                  <li>
+                    <button
+                      onClick={() => navigate("/dashboard")}
+                      className="text-walmart-blue hover:text-walmart-dark font-medium underline"
+                    >
+                      Skip auth and go to demo dashboard
+                    </button>
+                  </li>
                   <li>• Access full inventory management features</li>
                 </ul>
               </div>
