@@ -58,8 +58,8 @@ export default function Login() {
               alt="Wall-E Logo"
               className="h-40 sm:h-56 md:h-64 lg:h-72 w-auto mx-auto mb-4"
             />
-            <p className="text-sm text-muted-foreground">
-              Inventory Intelligence
+            <p className="text-xl text-muted-foreground">
+              Wall-E
             </p>
           </div>
         </div>
