@@ -627,23 +627,29 @@ export default function Dashboard() {
                 </Label>
               </div>
               <div className="space-y-2">
-                <button className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors text-left">
-                  <RefreshCw className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm font-medium text-gray-700">
+                <button className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 transition-all text-left group">
+                  <RefreshCw className="h-4 w-4 text-blue-500 group-hover:animate-spin" />
+                  <span className="text-sm font-medium text-gray-700 group-hover:text-blue-700">
                     Refresh Data
                   </span>
                 </button>
                 <button
                   onClick={() => setShowSalesTrend(!showSalesTrend)}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors text-left"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-100 transition-all text-left group"
                 >
                   {showSalesTrend ? (
                     <EyeOff className="h-4 w-4 text-orange-500" />
                   ) : (
                     <Eye className="h-4 w-4 text-orange-500" />
                   )}
-                  <span className="text-sm font-medium text-gray-700">
+                  <span className="text-sm font-medium text-gray-700 group-hover:text-orange-700">
                     {showSalesTrend ? "Hide" : "Show"} Sales Trends
+                  </span>
+                </button>
+                <button className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-purple-50 hover:to-purple-100 transition-all text-left group">
+                  <Download className="h-4 w-4 text-purple-500" />
+                  <span className="text-sm font-medium text-gray-700 group-hover:text-purple-700">
+                    Export Report
                   </span>
                 </button>
               </div>
