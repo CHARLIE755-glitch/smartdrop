@@ -469,30 +469,45 @@ export default function AuthForm() {
           </TabsContent>
         </Tabs>
 
+        {/* Demo Credentials Section */}
+        <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2">
+            🎭 Demo Mode Available
+          </h4>
+          <p className="text-xs text-blue-700 mb-2">
+            If you can't connect to the servers, try these demo credentials:
+          </p>
+          <div className="space-y-1 text-xs text-blue-600">
+            <div>• admin@walmart.com / password</div>
+            <div>• demo@smartdrop.com / demo123</div>
+            <div>• test@example.com / test123</div>
+          </div>
+        </div>
+
         {/* Debug Section - Remove in production */}
         {import.meta.env.DEV && (
           <div className="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
             <h4 className="text-xs font-semibold text-gray-600 mb-2">
               🔧 Debug Tools
             </h4>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={async () => {
-                  console.log("🧪 Testing auth connection...");
+                  console.log("🧪 Running full diagnostics...");
                   try {
-                    const { data, error } = await supabase.auth.getSession();
-                    console.log("Session test:", { data, error });
+                    const diagnostics =
+                      await networkDiagnostics.runFullDiagnostics(
+                        import.meta.env.VITE_SUPABASE_URL,
+                      );
                     toast({
-                      title: "Debug",
-                      description: error
-                        ? `Error: ${error.message}`
-                        : "Connection OK",
-                      variant: error ? "destructive" : "default",
+                      title: "Diagnostics Complete",
+                      description: `Internet: ${diagnostics.internet ? "✅" : "❌"} | Supabase: ${diagnostics.overall ? "✅" : "❌"}`,
+                      variant: diagnostics.overall ? "default" : "destructive",
                     });
                   } catch (err: any) {
-                    console.error("Debug test failed:", err);
+                    console.error("Diagnostics failed:", err);
                     toast({
-                      title: "Debug Error",
+                      title: "Diagnostics Failed",
                       description: err.message,
                       variant: "destructive",
                     });
@@ -500,18 +515,66 @@ export default function AuthForm() {
                 }}
                 className="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200"
               >
-                Test Connection
+                Run Diagnostics
               </button>
               <button
-                onClick={() => {
-                  console.log("🔍 Current values:");
-                  console.log("Email:", email);
-                  console.log("Password length:", password.length);
-                  console.log("Loading:", loading);
+                onClick={async () => {
+                  console.log("🧪 Testing auth connection...");
+                  try {
+                    const { data, error } = await supabase.auth.getSession();
+                    console.log("Session test:", { data, error });
+                    toast({
+                      title: "Auth Test",
+                      description: error
+                        ? `Error: ${error.message}`
+                        : "Connection OK",
+                      variant: error ? "destructive" : "default",
+                    });
+                  } catch (err: any) {
+                    console.error("Auth test failed:", err);
+                    toast({
+                      title: "Auth Test Failed",
+                      description: err.message,
+                      variant: "destructive",
+                    });
+                  }
                 }}
                 className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded hover:bg-green-200"
               >
-                Log Values
+                Test Auth
+              </button>
+              <button
+                onClick={() => {
+                  console.log("🔍 Current state:");
+                  console.log("Email:", email);
+                  console.log("Password length:", password.length);
+                  console.log("Loading:", loading);
+                  console.log("Network:", networkStatus);
+                }}
+                className="text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded hover:bg-purple-200"
+              >
+                Log State
+              </button>
+              <button
+                onClick={() => {
+                  // Test demo auth
+                  if (fallbackAuth.validateDemoCredentials(email, password)) {
+                    toast({
+                      title: "Demo Valid",
+                      description: "These are valid demo credentials!",
+                    });
+                  } else {
+                    toast({
+                      title: "Demo Invalid",
+                      description:
+                        "Not valid demo credentials. Try: admin@walmart.com / password",
+                      variant: "destructive",
+                    });
+                  }
+                }}
+                className="text-xs px-2 py-1 bg-yellow-100 text-yellow-800 rounded hover:bg-yellow-200"
+              >
+                Test Demo
               </button>
             </div>
           </div>
