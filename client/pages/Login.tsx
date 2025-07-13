@@ -58,7 +58,6 @@ export default function Login() {
               alt="Wall-E Logo"
               className="h-16 w-auto mx-auto mb-2"
             />
-            <h1 className="text-3xl font-bold text-walmart-blue">Wall-E</h1>
             <p className="text-sm text-muted-foreground">
               Inventory Intelligence
             </p>
@@ -71,7 +70,7 @@ export default function Login() {
               Admin Login
             </CardTitle>
             <CardDescription className="text-center text-muted-foreground">
-              Enter your credentials to access the Wall-E dashboard
+              Enter your credentials to access the dashboard
             </CardDescription>
           </CardHeader>
 
