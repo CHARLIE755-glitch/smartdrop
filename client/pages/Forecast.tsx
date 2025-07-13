@@ -632,35 +632,6 @@ export default function Forecast() {
                 </ResponsiveContainer>
               </div>
             </div>
-
-            {/* 3-Month Outlook */}
-            <div className="mt-8 p-6 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200">
-              <h3 className="text-lg font-semibold text-purple-800 mb-4 flex items-center gap-2">
-                📅 3-Month Outlook Summary
-                <Badge className="bg-purple-100 text-purple-700">
-                  AI Forecast
-                </Badge>
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-white rounded-lg border border-purple-100">
-                  <h4 className="font-semibold text-gray-800">Next Month</h4>
-                  <p className="text-2xl font-bold text-green-600">+18%</p>
-                  <p className="text-sm text-gray-600">Expected Growth</p>
-                </div>
-                <div className="text-center p-4 bg-white rounded-lg border border-purple-100">
-                  <h4 className="font-semibold text-gray-800">Peak Category</h4>
-                  <p className="text-lg font-bold text-blue-600">
-                    Seasonal Items
-                  </p>
-                  <p className="text-sm text-gray-600">Highest Demand</p>
-                </div>
-                <div className="text-center p-4 bg-white rounded-lg border border-purple-100">
-                  <h4 className="font-semibold text-gray-800">Confidence</h4>
-                  <p className="text-2xl font-bold text-purple-600">92%</p>
-                  <p className="text-sm text-gray-600">Prediction Accuracy</p>
-                </div>
-              </div>
-            </div>
           </CardContent>
         </Card>
 
