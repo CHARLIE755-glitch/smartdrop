@@ -505,48 +505,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Smart Filters Section */}
-            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-purple-50 rounded-lg">
-                  <Filter className="h-4 w-4 text-purple-600" />
-                </div>
-                <Label className="text-sm font-bold text-gray-800 uppercase tracking-wide">
-                  Smart Filters
-                </Label>
-              </div>
-              <div className="space-y-3">
-                <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="w-full h-10 border-2 border-gray-200 hover:border-purple-300 transition-colors">
-                    <SelectValue placeholder="Filter by status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="All">🔍 All Products</SelectItem>
-                    <SelectItem value="critical">🚨 Critical Stock</SelectItem>
-                    <SelectItem value="low">⚠️ Low Stock</SelectItem>
-                    <SelectItem value="good">✅ Healthy Stock</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                <Select
-                  value={categoryFilter}
-                  onValueChange={setCategoryFilter}
-                >
-                  <SelectTrigger className="w-full h-10 border-2 border-gray-200 hover:border-purple-300 transition-colors">
-                    <SelectValue placeholder="Filter by category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="All">📦 All Categories</SelectItem>
-                    <SelectItem value="Dairy">🥛 Dairy</SelectItem>
-                    <SelectItem value="Bakery">🍞 Bakery</SelectItem>
-                    <SelectItem value="Beverages">🥤 Beverages</SelectItem>
-                    <SelectItem value="Electronics">📱 Electronics</SelectItem>
-                    <SelectItem value="Health">💊 Health</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
             {/* Analytics Overview */}
             <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div className="flex items-center gap-3 mb-4">
@@ -852,7 +810,7 @@ export default function Dashboard() {
                               <TrendingUp className="h-4 w-4 text-blue-600" />
                             </div>
                             <h4 className="font-semibold text-gray-800">
-                              ���� Optimal Stock
+                              📊 Optimal Stock
                             </h4>
                           </div>
                           <div className="space-y-2">
