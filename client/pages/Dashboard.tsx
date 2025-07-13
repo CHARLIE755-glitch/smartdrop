@@ -505,61 +505,6 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Analytics Overview */}
-            <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-indigo-50 rounded-lg">
-                  <BarChart3 className="h-4 w-4 text-indigo-600" />
-                </div>
-                <Label className="text-sm font-bold text-gray-800 uppercase tracking-wide">
-                  Live Analytics
-                </Label>
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-red-50 to-red-100 rounded-lg border border-red-200">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                    <span className="text-sm font-medium text-red-800">
-                      Critical Items
-                    </span>
-                  </div>
-                  <span className="text-lg font-bold text-red-700">
-                    {storeInventoryData[selectedStore]?.filter(
-                      (item) => item.status === "critical",
-                    ).length || 0}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg border border-amber-200">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
-                    <span className="text-sm font-medium text-amber-800">
-                      Low Stock
-                    </span>
-                  </div>
-                  <span className="text-lg font-bold text-amber-700">
-                    {storeInventoryData[selectedStore]?.filter(
-                      (item) => item.status === "low",
-                    ).length || 0}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-green-50 to-green-100 rounded-lg border border-green-200">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full" />
-                    <span className="text-sm font-medium text-green-800">
-                      Healthy Stock
-                    </span>
-                  </div>
-                  <span className="text-lg font-bold text-green-700">
-                    {storeInventoryData[selectedStore]?.filter(
-                      (item) => item.status === "good",
-                    ).length || 0}
-                  </span>
-                </div>
-              </div>
-            </div>
-
             {/* Quick Actions Section */}
             <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div className="flex items-center gap-3 mb-4">
