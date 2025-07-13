@@ -71,10 +71,11 @@ export default function Auth() {
           {/* Page Header */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-foreground mb-2">
-              Supabase Authentication Demo
+              Welcome to SmartDrop
             </h1>
             <p className="text-muted-foreground">
-              Test Supabase authentication features with real user management
+              Get started with your inventory intelligence platform - Sign up
+              for a new account or sign in to continue
             </p>
           </div>
 
