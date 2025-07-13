@@ -117,10 +117,22 @@ export default function Login() {
                 {isLoading ? "Signing in..." : "Login"}
               </Button>
 
-              <div className="pt-4 text-center">
+              <div className="pt-4 text-center space-y-3">
                 <p className="text-xs text-muted-foreground">
                   Demo credentials: admin@walmart.com / password
                 </p>
+                <div className="border-t pt-3">
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Don't have an account?
+                  </p>
+                  <Link
+                    to="/auth"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-walmart-blue hover:text-walmart-dark transition-colors"
+                  >
+                    Create Account
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
               </div>
             </form>
           </CardContent>
