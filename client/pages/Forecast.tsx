@@ -553,6 +553,163 @@ export default function Forecast() {
           </>
         )}
 
+        {/* Seasonal Patterns Section */}
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              🗓️ Seasonal Patterns & Upcoming Trends
+              <Badge className="bg-orange-100 text-orange-800">
+                Predictive Analytics
+              </Badge>
+            </CardTitle>
+            <CardDescription>
+              AI-powered seasonal demand predictions based on historical
+              patterns and market trends
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Monthly Trending Products */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    📈 Upcoming Trends
+                  </h3>
+                  <Select
+                    value={selectedMonth}
+                    onValueChange={setSelectedMonth}
+                  >
+                    <SelectTrigger className="w-32">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="january">January</SelectItem>
+                      <SelectItem value="february">February</SelectItem>
+                      <SelectItem value="march">March</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-3">
+                  {upcomingTrends[selectedMonth].map((trend, index) => (
+                    <div
+                      key={index}
+                      className={`flex items-center justify-between p-4 rounded-lg border ${trend.bgColor} border-gray-200`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`w-3 h-3 rounded-full ${trend.change.includes("+") ? "bg-green-500" : "bg-red-500"}`}
+                        />
+                        <span className="font-medium text-gray-800">
+                          {trend.category}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className={`font-bold text-lg ${trend.color}`}>
+                          {trend.change}
+                        </span>
+                        {trend.change.includes("+") ? (
+                          <TrendingUp className="h-4 w-4 text-green-600" />
+                        ) : (
+                          <ArrowDown className="h-4 w-4 text-red-600" />
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                  <h4 className="font-semibold text-blue-800 mb-2">
+                    💡 Market Insights
+                  </h4>
+                  <ul className="text-sm text-blue-700 space-y-1">
+                    <li>
+                      • Seasonal demand patterns based on 3-year historical data
+                    </li>
+                    <li>
+                      • External factors: weather, holidays, economic trends
+                    </li>
+                    <li>• Real-time market analysis and competitor tracking</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Seasonal Chart */}
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                  📊 Category Performance Trends
+                </h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={seasonalData}>
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      className="opacity-30"
+                    />
+                    <XAxis dataKey="month" fontSize={12} />
+                    <YAxis fontSize={12} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "white",
+                        border: "1px solid #e2e8f0",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                      }}
+                    />
+                    <Legend />
+                    <Bar
+                      dataKey="beverages"
+                      fill="#0071CE"
+                      name="Cold Beverages"
+                      radius={[2, 2, 0, 0]}
+                    />
+                    <Bar
+                      dataKey="seasonal"
+                      fill="#FFC220"
+                      name="Seasonal Items"
+                      radius={[2, 2, 0, 0]}
+                    />
+                    <Bar
+                      dataKey="clothing"
+                      fill="#10B981"
+                      name="Apparel"
+                      radius={[2, 2, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* 3-Month Outlook */}
+            <div className="mt-8 p-6 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200">
+              <h3 className="text-lg font-semibold text-purple-800 mb-4 flex items-center gap-2">
+                📅 3-Month Outlook Summary
+                <Badge className="bg-purple-100 text-purple-700">
+                  AI Forecast
+                </Badge>
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="text-center p-4 bg-white rounded-lg border border-purple-100">
+                  <h4 className="font-semibold text-gray-800">Next Month</h4>
+                  <p className="text-2xl font-bold text-green-600">+18%</p>
+                  <p className="text-sm text-gray-600">Expected Growth</p>
+                </div>
+                <div className="text-center p-4 bg-white rounded-lg border border-purple-100">
+                  <h4 className="font-semibold text-gray-800">Peak Category</h4>
+                  <p className="text-lg font-bold text-blue-600">
+                    Seasonal Items
+                  </p>
+                  <p className="text-sm text-gray-600">Highest Demand</p>
+                </div>
+                <div className="text-center p-4 bg-white rounded-lg border border-purple-100">
+                  <h4 className="font-semibold text-gray-800">Confidence</h4>
+                  <p className="text-2xl font-bold text-purple-600">92%</p>
+                  <p className="text-sm text-gray-600">Prediction Accuracy</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Feature Preview */}
         <Card className="mt-8">
           <CardHeader>
