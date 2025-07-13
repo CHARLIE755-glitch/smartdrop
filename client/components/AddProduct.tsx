@@ -96,7 +96,7 @@ export default function AddProduct() {
           Add New Product
         </CardTitle>
         <CardDescription>
-          Add a new product to the SmartDrop inventory system
+          Add a new product to the Wall-E inventory system
         </CardDescription>
       </CardHeader>
       <CardContent>
