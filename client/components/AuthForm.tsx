@@ -106,10 +106,10 @@ export default function AuthForm() {
     <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle className="text-center text-walmart-blue">
-          SmartDrop Authentication
+          Join SmartDrop
         </CardTitle>
         <CardDescription className="text-center">
-          Sign in to your account or create a new one
+          Create your account to get started, or sign in if you already have one
         </CardDescription>
       </CardHeader>
       <CardContent>
