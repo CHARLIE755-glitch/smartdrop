@@ -56,7 +56,7 @@ export default function Login() {
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2F4cbca4b77bf64fb889cd6f8b4523b770%2F4dbe26d9efbf4fdf98f7e6391b9ff452?format=webp&width=800"
               alt="Wall-E Logo"
-              className="h-16 w-auto mx-auto mb-2"
+              className="h-20 w-auto mx-auto mb-2"
             />
             <p className="text-sm text-muted-foreground">
               Inventory Intelligence
