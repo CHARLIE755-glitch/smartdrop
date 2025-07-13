@@ -5,15 +5,23 @@ export const networkDiagnostics = {
   async testInternetConnection(): Promise<boolean> {
     try {
       console.log("🌐 Testing internet connection...");
+
+      // Use a simple, reliable endpoint with timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
       const response = await fetch("https://www.google.com/favicon.ico", {
         method: "HEAD",
         mode: "no-cors",
         cache: "no-cache",
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
       console.log("✅ Internet connection: OK");
       return true;
     } catch (error) {
-      console.error("❌ Internet connection: FAILED", error);
+      console.warn("⚠️ Internet connectivity test failed, assuming offline");
       return false;
     }
   },
@@ -22,6 +30,11 @@ export const networkDiagnostics = {
   async testSupabaseReachability(url: string): Promise<boolean> {
     try {
       console.log("🔗 Testing Supabase domain reachability...");
+
+      // Quick timeout for Supabase check
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+
       const domain = new URL(url).hostname;
       const testUrl = `https://${domain}`;
 
@@ -29,11 +42,14 @@ export const networkDiagnostics = {
         method: "HEAD",
         mode: "no-cors",
         cache: "no-cache",
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
       console.log("✅ Supabase domain: REACHABLE");
       return true;
     } catch (error) {
-      console.error("❌ Supabase domain: UNREACHABLE", error);
+      console.warn("⚠️ Supabase domain appears unreachable, using demo mode");
       return false;
     }
   },
@@ -42,6 +58,11 @@ export const networkDiagnostics = {
   async testSupabaseHealth(url: string): Promise<boolean> {
     try {
       console.log("🏥 Testing Supabase API health...");
+
+      // Very quick timeout for API health check
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+
       const healthUrl = `${url}/rest/v1/`;
 
       const response = await fetch(healthUrl, {
@@ -49,13 +70,14 @@ export const networkDiagnostics = {
         headers: {
           apikey: "test",
         },
+        signal: controller.signal,
       });
 
-      // Even with a bad API key, we should get a response if the service is up
+      clearTimeout(timeoutId);
       console.log("✅ Supabase API: RESPONDING");
       return true;
     } catch (error) {
-      console.error("❌ Supabase API: NOT RESPONDING", error);
+      console.warn("⚠️ Supabase API not responding, demo mode available");
       return false;
     }
   },
