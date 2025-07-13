@@ -30,23 +30,57 @@ export default function AuthForm() {
   });
   const { toast } = useToast();
 
-  // Test Supabase connection on component mount
+  // Test network and Supabase connection on component mount
   useEffect(() => {
     const testConnection = async () => {
       try {
-        console.log("🔗 Testing Supabase connection...");
+        console.log("🔗 Testing connections...");
+
+        // First, run network diagnostics
+        const diagnostics = await networkDiagnostics.runFullDiagnostics(
+          import.meta.env.VITE_SUPABASE_URL,
+        );
+
+        setNetworkStatus({
+          connected: diagnostics.internet,
+          supabaseReachable: diagnostics.overall,
+          lastChecked: new Date(),
+        });
+
+        if (!diagnostics.internet) {
+          toast({
+            title: "Network Error",
+            description:
+              "No internet connection detected. Using offline demo mode.",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        if (!diagnostics.overall) {
+          toast({
+            title: "Service Unavailable",
+            description:
+              "Supabase service is unreachable. Demo mode is available.",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        // Test Supabase auth specifically
         const { data, error } = await supabase.auth.getSession();
 
         if (error) {
-          console.error("❌ Supabase connection error:", error);
+          console.error("❌ Supabase auth error:", error);
+          setNetworkStatus((prev) => ({ ...prev, supabaseReachable: false }));
           toast({
-            title: "Connection Warning",
+            title: "Auth Service Warning",
             description:
-              "Having trouble connecting to authentication service. Please refresh the page.",
+              "Authentication service is having issues. Demo mode is available.",
             variant: "destructive",
           });
         } else {
-          console.log("✅ Supabase connection successful");
+          console.log("✅ Supabase auth connection successful");
           console.log(
             "Session:",
             data.session ? "Active session found" : "No active session",
@@ -54,10 +88,10 @@ export default function AuthForm() {
         }
       } catch (err) {
         console.error("💥 Connection test failed:", err);
+        setNetworkStatus((prev) => ({ ...prev, supabaseReachable: false }));
         toast({
-          title: "Connection Error",
-          description:
-            "Cannot connect to authentication service. Please check your internet connection.",
+          title: "Connection Failed",
+          description: "Cannot connect to services. Demo mode is available.",
           variant: "destructive",
         });
       }
@@ -170,7 +204,7 @@ export default function AuthForm() {
   };
 
   const signIn = async () => {
-    console.log("🔐 Starting signin process...");
+    console.log("�� Starting signin process...");
 
     // Validation
     if (!email || !password) {
